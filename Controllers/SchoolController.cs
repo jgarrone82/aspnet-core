@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using aspnet_core.Models;
@@ -15,7 +16,12 @@ public class SchoolController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var school = new School();
+        school.YearOfCreation = 2020;
+        school.SchoolId = Guid.NewGuid().ToString();
+        school.Name = "George's Institute";
+
+        return View(school);
     }
 
 
