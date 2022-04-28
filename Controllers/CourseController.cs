@@ -5,21 +5,24 @@ using aspnet_core.Models;
 
 namespace aspnet_core.Controllers;
 
-public class SchoolController : Controller
+public class CourseController : Controller
 {
-    private readonly ILogger<SchoolController> _logger;
+    private readonly ILogger<CourseController> _logger;
 
-    public SchoolController(ILogger<SchoolController> logger)
+    public CourseController(ILogger<CourseController> logger)
     {
         _logger = logger;
     }
 
     public IActionResult Index()
     {
-        var school = new School("George's Institute", 2020, SchoolType.High, "Argentina", "Córdoba", "2372 San Javier Street");        
-        school.UniqueId = Guid.NewGuid().ToString();
+        var course = new Course{
+            UniqueId = Guid.NewGuid().ToString(),
+            Name = "Cyber-security 101"
+        }; 
+        
 
-        return View(school);
+        return View(course);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

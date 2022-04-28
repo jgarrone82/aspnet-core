@@ -7,9 +7,18 @@
 
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+<div class="text-left">
     <h2>School name: @Model.Name </h2>
+
+    <h3>School type: @Model.SchoolType</h3>
+
+    <address>
+        <p>Address: @Model.Address </p>
+        <p>City: @Model.City</p>
+        <p>Country: @Model.Country</p>
+    </address>
 
     <p>Year of Creation: @Model.YearOfCreation.</p>
 </div>
