@@ -15,14 +15,20 @@ public class CourseController : Controller
     }
 
     public IActionResult Index()
-    {
-        var course = new Course{
-            UniqueId = Guid.NewGuid().ToString(),
-            Name = "Cyber-security 101"
-        }; 
-        
+    {        
+        var coursesList = new List<Course>(){
+                            new Course{UniqueId = Guid.NewGuid().ToString(),
+                            Name="Introduction 101"},
+                            new Course{UniqueId = Guid.NewGuid().ToString(),
+                            Name="C# 101"} ,
+                            new Course{UniqueId = Guid.NewGuid().ToString(),
+                            Name="Cyber-security 101"},
+                            new Course{UniqueId = Guid.NewGuid().ToString(),
+                            Name="Crypto analysis 101"}
+            };
 
-        return View(course);
+
+        return View(coursesList);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
