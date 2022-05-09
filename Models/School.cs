@@ -30,9 +30,7 @@ namespace aspnet_core.Models
             Country = country;
             City = city;
             Address = address;
-            //Grades = grades;
-        }
-        //public School(string name, int year) => (City, YearOfCreation) = (name, year);
+        }        
 
         public override string ToString()
         {

@@ -8,6 +8,10 @@ namespace aspnet_core.Controllers;
 public class SchoolController : Controller
 {
     private SchoolContext _context;
+    public SchoolController(SchoolContext context)
+    {
+        _context= context;
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
@@ -24,11 +28,4 @@ public class SchoolController : Controller
 
         return View(school);
     }
-
-    public SchoolController(SchoolContext context)
-    {
-        _context= context;
-    }
-
-
 }

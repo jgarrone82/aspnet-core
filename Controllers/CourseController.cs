@@ -2,33 +2,18 @@ using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using aspnet_core.Models;
-
 namespace aspnet_core.Controllers;
 
 public class CourseController : Controller
 {
-    private readonly ILogger<CourseController> _logger;
-
-    public CourseController(ILogger<CourseController> logger)
+    private SchoolContext _context;
+    public CourseController(SchoolContext context)
     {
-        _logger = logger;
+        _context= context;
     }
-
     public IActionResult Index()
-    {        
-        var coursesList = new List<Course>(){
-                            new Course{UniqueId = Guid.NewGuid().ToString(),
-                            Name="Introduction 101"},
-                            new Course{UniqueId = Guid.NewGuid().ToString(),
-                            Name="C# 101"} ,
-                            new Course{UniqueId = Guid.NewGuid().ToString(),
-                            Name="Cyber-security 101"},
-                            new Course{UniqueId = Guid.NewGuid().ToString(),
-                            Name="Crypto analysis 101"}
-            };
-
-
-        return View(coursesList);
+    { 
+        return View(_context.Courses);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

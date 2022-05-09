@@ -1,4 +1,5 @@
 using aspnet_core.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,19 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<SchoolContext>(options => options.UseInMemoryDatabase("testDB"));
 
 var app = builder.Build();
+
+using(var scope=app.Services.CreateScope()){
+    var serv=scope.ServiceProvider;
+    try
+    {
+        var contex=serv.GetRequiredService<SchoolContext>();
+        contex.Database.EnsureCreated();
+    }
+    catch (System.Exception)
+    {
+        throw;
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

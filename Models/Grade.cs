@@ -12,5 +12,9 @@ namespace aspnet_core.Models
         public List<Student> Students{ get; set; } = new List<Student>();
         public string Address { get; set; } = "";
 
+        public string SchoolId {get; set;} = "";
+
+        public School school {get; set;}
+
     }
 }
