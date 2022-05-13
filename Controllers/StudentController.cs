@@ -10,11 +10,23 @@ public class StudentController : Controller
     private SchoolContext _context;
     public StudentController(SchoolContext context)
     {
-        _context= context;
+        _context = context;
     }
+
+    [Route("Student/Index")]
     public IActionResult Index()
-    {        
+    {
         return View(_context.Students);
+    }
+
+    [Route("Student/Index/{studentId}")]
+    public IActionResult Index(string studentId)
+    {
+        var student = from s in _context.Students
+                      where s.UniqueId == studentId
+                      select s;
+
+        return View(student);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

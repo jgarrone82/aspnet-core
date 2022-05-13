@@ -11,9 +11,21 @@ public class CourseController : Controller
     {
         _context= context;
     }
+
+    [Route("Course/Index")]
     public IActionResult Index()
     { 
         return View(_context.Courses);
+    }
+
+    [Route("Course/Index/{courseId}")]
+    public IActionResult Index(string courseId)
+    {
+        var course = from c in _context.Courses
+                            where c.UniqueId == courseId
+                            select c;
+
+        return View(course);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
