@@ -1,0 +1,27 @@
+﻿@model Grade
+
+@{
+    ViewData["Title"] = "Grade Creation";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+<div class="text-left">
+    <form method="post">
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name"/>
+        </div>
+        <div>
+            <label asp-for="Address"></label>
+            <input asp-for="Address"/>
+        </div>
+        <div>
+            <label asp-for="HourType"></label>
+            <input asp-for="HourType"/>
+        </div>
+
+        <input type="submit" />
+    </form>
+</div>

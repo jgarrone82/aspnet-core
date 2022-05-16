@@ -28,6 +28,19 @@ public class GradeController : Controller
         return View(grade);
     }
 
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(Grade grade)
+    {
+        _context.Grades.Add(grade);
+        _context.SaveChanges();
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
