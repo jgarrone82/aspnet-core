@@ -36,9 +36,20 @@ public class GradeController : Controller
     [HttpPost]
     public IActionResult Create(Grade grade)
     {
-        _context.Grades.Add(grade);
-        _context.SaveChanges();
-        return View();
+        if (ModelState.IsValid)
+        {
+            var school = _context.Schools.FirstOrDefault();
+            grade.SchoolId = school.UniqueId;
+            _context.Grades.Add(grade);
+            _context.SaveChanges();
+            ViewBag.Message = "Grade created";
+            return View("Index",grade);
+        }
+        else
+        {
+            return View();
+        }
+
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

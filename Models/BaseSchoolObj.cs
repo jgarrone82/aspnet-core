@@ -10,7 +10,7 @@ namespace aspnet_core.Models
     {
         [Key]
         public string UniqueId { get; set; }
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         public BaseSchoolObj()
         {
