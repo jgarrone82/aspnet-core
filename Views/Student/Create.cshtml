@@ -1,0 +1,24 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Student Information";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+<div class="text-left">
+<div class="text-left" asp-validation-summary="All">
+    <form method="post">
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name"/>
+        </div>
+         <div>
+            <label asp-for="grade"></label>            
+            @* //TODO create the dropdown list *@
+        </div>   
+
+        <input type="submit" />
+    </form>
+</div>
