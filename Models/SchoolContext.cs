@@ -46,19 +46,22 @@ namespace aspnet_core.Models
                             UniqueId = Guid.NewGuid().ToString(),
                             SchoolId = school.UniqueId,
                             Name = "Grade 101",
-                            HourType = HourTypes.Morning
+                            HourType = HourTypes.Morning,
+                            Address = "2372 San Javier Street"
                             },
                         new Grade() {
                             UniqueId = Guid.NewGuid().ToString(),
                             SchoolId = school.UniqueId,
                             Name = "Grade 201",
-                            HourType = HourTypes.Morning
+                            HourType = HourTypes.Morning,
+                            Address = "2372 San Javier Street"
                             },
                         new Grade() {
                             UniqueId = Guid.NewGuid().ToString(),
                             SchoolId = school.UniqueId,
                             Name = "Grade 301",
-                            HourType = HourTypes.Morning
+                            HourType = HourTypes.Morning,
+                            Address = "2372 San Javier Street"
                             }
             };
         }
