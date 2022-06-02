@@ -8,7 +8,7 @@
 
 #settings
 appsettings.Development.json
-appsettings.json
+
 
 # User-specific files
 *.suo
