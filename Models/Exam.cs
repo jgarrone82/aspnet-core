@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace aspnet_core.Models
 {
     public class Exam : BaseSchoolObj
-    {
-        public Student Student { get; set; }
-        public string StudentId { get; set; } ="";
+    {        
+        public Student? Student { get; set; }
+        public string? StudentUniqueId { get; set; } ="";
         public Course Course { get; set; }
         public string CourseId { get; set; }= "";
         public float Note { get; set; }

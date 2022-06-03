@@ -9,9 +9,6 @@ builder.Services.AddControllersWithViews();
 
 //builder.Services.AddDbContext<SchoolContext>(options => options.UseInMemoryDatabase("testDB"));
 
-
-
-
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
 builder.Services.AddDbContext<SchoolContext>(
     options => options.UseSqlServer(connectionString));

@@ -1,4 +1,4 @@
-@model IEnumerable<aspnet_core.Models.Student>
+@model IEnumerable<aspnet_core.Models.Exam>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.grade)
+                @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -25,7 +31,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.grade.Name)
+                @Html.DisplayFor(modelItem => item.Student.UniqueId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.UniqueId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

@@ -9,7 +9,7 @@ namespace aspnet_core.Models
     public class Grade:BaseSchoolObj
     {
         [Required]
-        [StringLength(8, ErrorMessage="The max lenght is 8 characters")]
+        [StringLength(10, ErrorMessage="The max lenght is 10 characters")]
         public override string Name { get; set; } = "";
         public HourTypes HourType { get; set; }
         public List<Course> Courses{ get; set; } = new List<Course>();
@@ -21,7 +21,7 @@ namespace aspnet_core.Models
 
         public string SchoolId {get; set;} = "";
 
-        public School School {get; set;} 
+        public School? School {get; set;} 
 
     }
 }

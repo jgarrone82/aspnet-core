@@ -9,7 +9,7 @@ namespace aspnet_core.Models
     {
         public string GradeId { get; set; } = "";
 
-        public Grade grade { get; set; }
+        public Grade? grade { get; set; }
 
         public List<Exam> Exams { get; set; } = new List<Exam>();
     }

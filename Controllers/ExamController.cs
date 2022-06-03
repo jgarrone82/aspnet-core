@@ -9,87 +9,94 @@ using aspnet_core.Models;
 
 namespace aspnet_core.Controllers
 {
-    public class SchoolController : Controller
+    public class ExamController : Controller
     {
         private readonly SchoolContext _context;
 
-        public SchoolController(SchoolContext context)
+        public ExamController(SchoolContext context)
         {
             _context = context;
         }
 
-        // GET: School
+        // GET: Exam
         public async Task<IActionResult> Index()
         {
-              return _context.Schools != null ? 
-                          View(await _context.Schools.ToListAsync()) :
-                          Problem("Entity set 'SchoolContext.Schools'  is null.");
+            var schoolContext = _context.Exams.Include(e => e.Course).Include(e => e.Student);
+            return View(await schoolContext.ToListAsync());
         }
 
-        // GET: School/Details/5
+        // GET: Exam/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null || _context.Schools == null)
+            if (id == null || _context.Exams == null)
             {
                 return NotFound();
             }
 
-            var school = await _context.Schools
+            var exam = await _context.Exams
+                .Include(e => e.Course)
+                .Include(e => e.Student)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
-            if (school == null)
+            if (exam == null)
             {
                 return NotFound();
             }
 
-            return View(school);
+            return View(exam);
         }
 
-        // GET: School/Create
+        // GET: Exam/Create
         public IActionResult Create()
         {
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId");
+            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "UniqueId");
             return View();
         }
 
-        // POST: School/Create
+        // POST: Exam/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("YearOfCreation,Country,City,Address,SchoolType,UniqueId,Name")] School school)
+        public async Task<IActionResult> Create([Bind("StudentUniqueId,CourseId,Note,UniqueId,Name")] Exam exam)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(school);
+                _context.Add(exam);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(school);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId", exam.CourseId);
+            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "UniqueId", exam.StudentUniqueId);
+            return View(exam);
         }
 
-        // GET: School/Edit/5
+        // GET: Exam/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null || _context.Schools == null)
+            if (id == null || _context.Exams == null)
             {
                 return NotFound();
             }
 
-            var school = await _context.Schools.FindAsync(id);
-            if (school == null)
+            var exam = await _context.Exams.FindAsync(id);
+            if (exam == null)
             {
                 return NotFound();
             }
-            return View(school);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId", exam.CourseId);
+            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "UniqueId", exam.StudentUniqueId);
+            return View(exam);
         }
 
-        // POST: School/Edit/5
+        // POST: Exam/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("YearOfCreation,Country,City,Address,SchoolType,UniqueId,Name")] School school)
+        public async Task<IActionResult> Edit(string id, [Bind("StudentUniqueId,CourseId,Note,UniqueId,Name")] Exam exam)
         {
-            if (id != school.UniqueId)
+            if (id != exam.UniqueId)
             {
                 return NotFound();
             }
@@ -98,12 +105,12 @@ namespace aspnet_core.Controllers
             {
                 try
                 {
-                    _context.Update(school);
+                    _context.Update(exam);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SchoolExists(school.UniqueId))
+                    if (!ExamExists(exam.UniqueId))
                     {
                         return NotFound();
                     }
@@ -114,49 +121,53 @@ namespace aspnet_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(school);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId", exam.CourseId);
+            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "UniqueId", exam.StudentUniqueId);
+            return View(exam);
         }
 
-        // GET: School/Delete/5
+        // GET: Exam/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null || _context.Schools == null)
+            if (id == null || _context.Exams == null)
             {
                 return NotFound();
             }
 
-            var school = await _context.Schools
+            var exam = await _context.Exams
+                .Include(e => e.Course)
+                .Include(e => e.Student)
                 .FirstOrDefaultAsync(m => m.UniqueId == id);
-            if (school == null)
+            if (exam == null)
             {
                 return NotFound();
             }
 
-            return View(school);
+            return View(exam);
         }
 
-        // POST: School/Delete/5
+        // POST: Exam/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            if (_context.Schools == null)
+            if (_context.Exams == null)
             {
-                return Problem("Entity set 'SchoolContext.Schools'  is null.");
+                return Problem("Entity set 'SchoolContext.Exams'  is null.");
             }
-            var school = await _context.Schools.FindAsync(id);
-            if (school != null)
+            var exam = await _context.Exams.FindAsync(id);
+            if (exam != null)
             {
-                _context.Schools.Remove(school);
+                _context.Exams.Remove(exam);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SchoolExists(string id)
+        private bool ExamExists(string id)
         {
-          return (_context.Schools?.Any(e => e.UniqueId == id)).GetValueOrDefault();
+          return (_context.Exams?.Any(e => e.UniqueId == id)).GetValueOrDefault();
         }
     }
 }
