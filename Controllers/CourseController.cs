@@ -47,7 +47,7 @@ namespace aspnet_core.Controllers
         // GET: Course/Create
         public IActionResult Create()
         {
-            ViewData["GradeId"] = new SelectList(_context.Grades, "UniqueId", "UniqueId");
+            ViewData["GradeId"] = new SelectList(_context.Grades, "UniqueId", "Name");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace aspnet_core.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GradeId"] = new SelectList(_context.Grades, "UniqueId", "UniqueId", course.GradeId);
+            ViewData["GradeId"] = new SelectList(_context.Grades, "UniqueId", "Name", course.GradeId);
             return View(course);
         }
 
@@ -81,7 +81,7 @@ namespace aspnet_core.Controllers
             {
                 return NotFound();
             }
-            ViewData["GradeId"] = new SelectList(_context.Grades, "UniqueId", "UniqueId", course.GradeId);
+            ViewData["GradeId"] = new SelectList(_context.Grades, "UniqueId", "Name", course.GradeId);
             return View(course);
         }
 
@@ -117,7 +117,7 @@ namespace aspnet_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GradeId"] = new SelectList(_context.Grades, "UniqueId", "UniqueId", course.GradeId);
+            ViewData["GradeId"] = new SelectList(_context.Grades, "UniqueId", "Name", course.GradeId);
             return View(course);
         }
 

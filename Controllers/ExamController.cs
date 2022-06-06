@@ -48,8 +48,8 @@ namespace aspnet_core.Controllers
         // GET: Exam/Create
         public IActionResult Create()
         {
-            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId");
-            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "UniqueId");
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "Name");
+            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "Name");
             return View();
         }
 
@@ -66,8 +66,8 @@ namespace aspnet_core.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId", exam.CourseId);
-            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "UniqueId", exam.StudentUniqueId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "Name", exam.CourseId);
+            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "Name", exam.StudentUniqueId);
             return View(exam);
         }
 
@@ -84,8 +84,8 @@ namespace aspnet_core.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId", exam.CourseId);
-            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "UniqueId", exam.StudentUniqueId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "Name", exam.CourseId);
+            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "Name", exam.StudentUniqueId);
             return View(exam);
         }
 
@@ -121,8 +121,8 @@ namespace aspnet_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "UniqueId", exam.CourseId);
-            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "UniqueId", exam.StudentUniqueId);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "UniqueId", "Name", exam.CourseId);
+            ViewData["StudentUniqueId"] = new SelectList(_context.Students, "UniqueId", "Name", exam.StudentUniqueId);
             return View(exam);
         }
 

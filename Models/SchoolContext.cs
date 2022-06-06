@@ -31,12 +31,12 @@ namespace aspnet_core.Models
             // for each grade, load the courses
             var coursesList = LoadCourses(grades);
             // for each grade, load the students
-            var studentList = LoadStudents(grades);   
+            var studentList = LoadStudents(grades);            
 
             modelBuilder.Entity<School>().HasData(school);
             modelBuilder.Entity<Grade>().HasData(grades.ToArray());
             modelBuilder.Entity<Course>().HasData(coursesList.ToArray());
-            modelBuilder.Entity<Student>().HasData(studentList.ToArray());
+            modelBuilder.Entity<Student>().HasData(studentList.ToArray());            
 
         }
         private static List<Grade> LoadGrades(School school)
@@ -47,7 +47,7 @@ namespace aspnet_core.Models
                             SchoolId = school.UniqueId,
                             Name = "Grade 101",
                             HourType = HourTypes.Morning,
-                            Address = "2372 San Javier Street"
+                            Address = "2372 San Javier Street"                            
                             },
                         new Grade() {
                             UniqueId = Guid.NewGuid().ToString(),
@@ -132,5 +132,6 @@ namespace aspnet_core.Models
 
             return studentList.OrderBy((al) => al.UniqueId).Take(randomAmount).ToList();
         }
+
     }
 }
